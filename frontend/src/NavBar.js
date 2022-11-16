@@ -1,15 +1,17 @@
 import React from "react";
 import {NavLink} from "react-router-dom"
 import { Navbar, Nav, NavItem } from "reactstrap";
+import 'bootstrap/dist/css/bootstrap.css';
+import './NavBar.css'
 
 const NavBar = () => {
     return (
         <div>
-            <Navbar  >
+            <Navbar expand="md"  navbar="true" >
                 <NavLink exact to='/'>
                     Jobly
                 </NavLink>
-                <Nav>
+                <Nav className="ml-auto" >
                     <NavItem>
                         <NavLink exact to='/signup'>Signup</NavLink>
                     </NavItem>
