@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Switch, Route, Redirect, BrowserRouter } from "react-router-dom";
 import Home from "./Home";
 import Signup from "./Signup";
@@ -8,8 +8,35 @@ import CompanyDetails from "./CompanyDetails";
 import Jobs from "./Jobs";
 import Profile from "./Profile";
 import NavBar from "./NavBar";
+import useApi from "./hooks/useApi";
 
 const Router = () => {
+    const [user, setUser] = useState()
+    const [token, setToken] = useState({token: ""})
+    const [badData, setBadData] = useState()
+
+    useEffect(() => {
+        if(Object.values(token).length === 1){
+            const getUser = async() => {
+
+            }
+        }
+    }, [token])
+
+    const registerUser = async(data) => {
+        try {
+            let res = await useApi.register(data)
+            setToken(() => ({
+                token: res
+            }))
+
+        } catch {
+            console.log('failed')
+            setBadData(true)
+
+        }
+
+    }
 
 
     return (
@@ -21,7 +48,7 @@ const Router = () => {
                 <Home />
             </Route>
             <Route exact path="/signup">
-                <Signup />
+                <Signup registerUser={registerUser}/>
             </Route>
             <Route exact path='/login'>
                 <Login />

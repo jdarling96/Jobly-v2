@@ -1,38 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Spinner } from "react-spinners-css";
 import { Form, FormGroup, Input, Button } from "reactstrap";
-import JoblyApi from "./api";
+import useApi from "./hooks/useApi";
 import CompanyCard from "./CompanyCard";
 
 const Companies = () => {
-  const [companyList, setCompanyList] = useState({ companies: [] });
-  const [searchFilter, setSearchFilter] = useState();
-  const [isLoading, setIsLoading] = useState(true);
+  const [companies, filter, loading] = useApi('getAllCompanies')
 
-  // for search filters the values of the 3 params cannot be left blank eg name= ...
-
-  useEffect(() => {
-    async function getCompanyList(searchFilter) {
-      let companies = await JoblyApi.getAllCompanies(searchFilter);
-      setCompanyList(() => ({
-        companies: [...companies],
-      }));
-      setIsLoading(false);
-    }
-    getCompanyList(searchFilter);
-  }, [searchFilter]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const { value } = e.target[0];
     if (value === "") {
-      setSearchFilter();
+      filter();
     } else {
-      setSearchFilter({ name: value });
+      filter({ name: value });
     }
 };
 
-  if (isLoading) {
+  if (loading) {
     return (
       <div className="loading">
         <Spinner />
@@ -53,10 +39,10 @@ const Companies = () => {
           <Button>Search</Button>
         </FormGroup>
       </Form>
-      {companyList.companies.length === 0 ? (
-        <p>You Suck!!</p>
+      {companies.length === 0 ? (
+        <p>Sorry, no results were found!</p>
       ) : (
-        companyList.companies.map((c) => (
+        companies.map((c) => (
           <CompanyCard
             key={c.handle}
             handle={c.handle}
