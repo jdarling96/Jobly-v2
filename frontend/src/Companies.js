@@ -30,9 +30,7 @@ const Companies = () => {
     } else {
       setSearchFilter({ name: value });
     }
-
-    console.log(e.target[0].value);
-  };
+};
 
   if (isLoading) {
     return (

@@ -1,11 +1,15 @@
 import React from "react";
 import { Card, CardTitle, CardBody, CardText, CardImg } from 'reactstrap'
+import { Link }from "react-router-dom";
+import './CompanyCard.css'
 import 'bootstrap/dist/css/bootstrap.css';
 
-const CompanyCard = ({ name, description, numEmployees, logo }) => {
+
+const CompanyCard = ({ handle, name, description, numEmployees, logo }) => {
 
     return (
         <div>
+         <Link style={{textDecoration: 'none'}} to={`/companies/${handle}`}>
             <Card className="my-2">
                 <CardBody>
                     <CardTitle>
@@ -25,6 +29,7 @@ const CompanyCard = ({ name, description, numEmployees, logo }) => {
                 alt="card logo of company" 
                 src={logo}/>
             </Card>
+            </Link>
 
         </div>
     )
