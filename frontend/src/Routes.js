@@ -8,7 +8,7 @@ import CompanyDetails from "./CompanyDetails";
 import Jobs from "./Jobs";
 import Profile from "./Profile";
 import NavBar from "./NavBar";
-import useApi from "./hooks/useApi";
+import JoblyApi from "./api";
 
 const Router = () => {
     const [user, setUser] = useState()
@@ -17,7 +17,7 @@ const Router = () => {
 
     useEffect(() => {
         if(Object.values(token).length === 1){
-            const getUser = async() => {
+            const getUser = async(user) => {
 
             }
         }
@@ -25,14 +25,16 @@ const Router = () => {
 
     const registerUser = async(data) => {
         try {
-            let res = await useApi.register(data)
+            let res = await JoblyApi.register(data)
             setToken(() => ({
                 token: res
             }))
+            setUser(data.username)
+            
 
-        } catch {
-            console.log('failed')
-            setBadData(true)
+        } catch (err) {
+            throw err
+            
 
         }
 
