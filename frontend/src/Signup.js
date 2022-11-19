@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 
-const Signup = ({registerUser}) => {
+const Signup = ({register}) => {
     const history = useHistory()
     const INITIAL_STATE = {
         username:"",
@@ -25,7 +25,7 @@ const Signup = ({registerUser}) => {
     const handleSubmit = async(e) => {
         e.preventDefault()
         try {
-            await registerUser(formData)
+            await register(formData)
             setFormData(INITIAL_STATE)
             history.push('/')
             
@@ -62,7 +62,7 @@ const Signup = ({registerUser}) => {
                     <Input
                     id="password"
                     name="password"
-                    type="text"
+                    type="password"
                     value={formData.password}
                     onChange={handleChange}>
                     </Input>

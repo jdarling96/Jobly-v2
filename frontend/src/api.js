@@ -68,7 +68,7 @@ class JoblyApi {
 
   /** register a new user and recive token */
 
-  static async register(userInfo={username:"testuser", password:"password"}) {
+  static async register(userInfo) {
     let res = await this.request('auth/register', userInfo, "post")
     this.token = res.token
     return this.token
@@ -83,7 +83,7 @@ class JoblyApi {
   }
 
   static async getUser(username){
-    let res = await this.request(`users/${username}`, username, "post")
+    let res = await this.request(`users/${username}`)
     return res.user
   }
 }
