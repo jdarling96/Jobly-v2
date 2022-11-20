@@ -10,34 +10,44 @@ import Profile from "./Profile";
 import NavBar from "./NavBar";
 import JoblyApi from "./api";
 import CurrUserContext from "./CurrUserContext";
+import useLocalStorageState from "./hooks/useLocalStorageState";
 
 const Router = () => {
-  const [user, setUser] = useState();
-  const [token, setToken] = useState({ token: "" });
+
+  const [state, setState, setLocalStorage, clearLocalStorage] = useLocalStorageState("token", "user")
+  const [user, setUser] = useState()
+  
+
+  
+  console.log(state)
   //const [badData, setBadData] = useState()
 
   useEffect(() => {
-    if (token.token) {
+    if (state.token) {
+      console.log(state)
       const getUser = async (username) => {
-        const res = await JoblyApi.getUser(username);
-        setUser(res);
+        const res = await JoblyApi.getUser(username, state.token);
+        setLocalStorage()
+        setUser(res)
       };
-      getUser(user);
+      getUser(state.user);
     }
-  }, [token]);
+  }, [state]);
 
-  console.log(user);
+ /*  console.log(user);
   console.log(token);
   console.log(Object.values(token).length);
-  console.log(Object.values(token))
+  console.log(Object.values(token)) */
 
   const registerUser = async (data) => {
     try {
       let res = await JoblyApi.register(data);
-      setUser(data.username);
-      setToken(() => ({
-        token: res,
+      setState(() => ({
+        user: data.username,
+        token: res
       }));
+      
+      
     } catch (err) {
       throw err;
     }
@@ -46,10 +56,11 @@ const Router = () => {
   const loginUser = async (data) => {
     try {
         let res = await JoblyApi.login(data)
-        setUser(data.username)
-        setToken(() => ({
-            token: res,
-          }));
+        setState(() => ({
+          user: data.username,
+          token: res
+        }));
+        
 
         
     } catch (err) {
@@ -59,8 +70,8 @@ const Router = () => {
   }
 
   const logoutUser = () => {
-    setToken({ token: "" })
-    setUser()
+    setState({ token: "", user: "" })
+    
     console.log('worked')
   }
 

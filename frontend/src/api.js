@@ -82,16 +82,17 @@ class JoblyApi {
     return this.token
   }
 
-  static async getUser(username){
+  static async getUser(username, localStorageToken){
+    if(!this.token){
+      this.token = localStorageToken
+    }
     let res = await this.request(`users/${username}`)
     return res.user
   }
 }
 
 // for now, put token ("testuser" / "password" on class)
-/* JoblyApi.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
-    "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
-    "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc"; */
+/* JoblyApi.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkRlbW8gVXNlciIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2Njg5NzcwMDN9.hyzAYw6-DcQk6zDqZ-hABWCf0LdsH0y-tIdwlrpoTtQ" */
 
 export default JoblyApi
 
