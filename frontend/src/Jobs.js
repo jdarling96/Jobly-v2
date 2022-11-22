@@ -1,12 +1,18 @@
-import React from "react";
+import React,{useContext} from "react";
+import { Redirect } from "react-router-dom";
 import { Spinner } from "react-spinners-css";
 import { Form, FormGroup, Input, Button } from "reactstrap";
 //import 'bootstrap/dist/css/bootstrap.css';
 import useApi from "./hooks/useApi";
 import JobsCard from "./JobsCard";
+import CurrUserContext from "./CurrUserContext";
 
 const Jobs = () => {
-  const [jobs, filter, loading] = useApi("getAllJobs");
+  
+  const user = useContext(CurrUserContext)
+ 
+  const [jobs, filter, loading] = useApi("getAllJobs", user);
+  if(user === undefined) return <Redirect to="/login" />
 
   const handleSubmit = (e) => {
     e.preventDefault();

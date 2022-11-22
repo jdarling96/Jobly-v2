@@ -71,6 +71,8 @@ const Router = () => {
 
   const logoutUser = () => {
     setState({ token: "", user: "" })
+    setUser()
+    clearLocalStorage()
     
     console.log('worked')
   }

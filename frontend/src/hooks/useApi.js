@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import JoblyApi from "../api";
 
-const useApi = (method, identifier) => {
+
+const useApi = (method, user, identifier) => {
   const history = useHistory()
   const [response, setResponse] = useState();
   const [searchFilter, setSearchFilter] = useState();
@@ -12,7 +13,9 @@ const useApi = (method, identifier) => {
   if(method === 'getAllJobs') method = JoblyApi.getAllJobs(searchFilter)
   if(method === 'getJob') method = JoblyApi.getJob(identifier)
   useEffect(() => {
+    if(user) { 
     const getData = async () => {
+     
     try {
       
         const res = await method
@@ -27,6 +30,9 @@ const useApi = (method, identifier) => {
     }
   }
   getData()
+}
+
+ 
     
   }, [searchFilter])
 

@@ -1,12 +1,18 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React,{useContext} from "react";
+import { useParams, Redirect } from "react-router-dom";
 import { Spinner } from "react-spinners-css";
 import useApi from "./hooks/useApi";
 import JobsCard from "./JobsCard"
+import CurrUserContext from "./CurrUserContext";
+
 
 const CompanyDetails = () => {
+  
+  const user = useContext(CurrUserContext)
+  
     const { handle } = useParams()
-    const [company,,loading] = useApi('getCompany', handle)
+    const [company,,loading] = useApi('getCompany', user, handle)
+    if(user === undefined) return <Redirect to="/login" />
     
     
     

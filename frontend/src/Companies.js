@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
+import {Redirect} from "react-router-dom";
 import { Spinner } from "react-spinners-css";
 import { Form, FormGroup, Input, Button } from "reactstrap";
 import useApi from "./hooks/useApi";
 import CompanyCard from "./CompanyCard";
+import CurrUserContext from "./CurrUserContext";
 
 const Companies = () => {
-  const [companies, filter, loading] = useApi('getAllCompanies')
+  
+  const user = useContext(CurrUserContext)
+  
+  
+  const [companies, filter, loading] = useApi('getAllCompanies', user)
+  if(user === undefined) {
+    return <Redirect to="/login"/>
+  }
 
 
   const handleSubmit = (e) => {

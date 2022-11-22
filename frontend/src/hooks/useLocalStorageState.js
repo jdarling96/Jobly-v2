@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import {useState} from "react";
 
 const useLocalStorageState = (key1, key2) => {
 
@@ -22,8 +22,8 @@ const useLocalStorageState = (key1, key2) => {
 
 
 const clearLocalStorage = () => {
-            localStorage.clear()
-            setState(INITIAL_STATE)
+    localStorage.clear()
+            
             
         }
         
