@@ -1,8 +1,16 @@
-import React from "react";
-import { Card, CardTitle, CardBody, CardText } from "reactstrap";
+import React,{useContext} from "react";
+import { Card, CardTitle, CardBody, CardText, Button } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.css";
+import CurrUserContext from "./CurrUserContext";
 
-const JobsCard = ({ title, salary, equity, companyName }) => {
+const JobsCard = ({ id, title, salary, equity, companyName, apply }) => {
+  const user = useContext(CurrUserContext)
+  let applied = user.applications.find(c => id === c)
+  
+  const handleClick = async () => {
+   await apply(user.username, id)
+  }
+  
   return (
     <div>
       <Card>
@@ -15,6 +23,16 @@ const JobsCard = ({ title, salary, equity, companyName }) => {
           </CardText>
           <CardText>
             <small>Equity: {equity}</small>
+          </CardText>
+          <CardText>
+            {applied 
+            ?
+            null
+            :
+            <Button onClick={handleClick}>
+              Apply
+            </Button>
+}
           </CardText>
         </CardBody>
       </Card>

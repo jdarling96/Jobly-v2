@@ -10,7 +10,7 @@ const Login = ({login}) => {
        
     }
     const [formData, setFormData] = useState(INITIAL_STATE)
-    const [showError, setShowError] = useState([])
+    const [showMsg, setShowMsg] = useState()
 
     const handleChange = (e) => {
         const {name, value} = e.target
@@ -30,7 +30,7 @@ const Login = ({login}) => {
 
         } catch (err) {
             console.log(err)
-            setShowError(() =>([...err]))
+            setShowMsg(err.join(''))
 
         }
         
@@ -65,9 +65,9 @@ const Login = ({login}) => {
                     onChange={handleChange}>
                     </Input>
                 </FormGroup>
-                {(showError.length)
+                {(showMsg)
                 ?
-                <p>{showError.join('')}</p>
+                <p>{showMsg}</p>
                 :
                 null
             }

@@ -9,6 +9,7 @@ import CurrUserContext from "./CurrUserContext";
 const Companies = () => {
   
   const user = useContext(CurrUserContext)
+  console.log(user)
   
   
   const [companies, filter, loading] = useApi('getAllCompanies', user)

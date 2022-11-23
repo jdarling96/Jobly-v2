@@ -12,7 +12,7 @@ const Signup = ({register}) => {
         email:""
     }
     const [formData, setFormData] = useState(INITIAL_STATE)
-    const [showError, setShowError] = useState([])
+    const [showMsg, setShowMsg] = useState()
 
     const handleChange = (e) => {
         const {name, value} = e.target
@@ -32,7 +32,7 @@ const Signup = ({register}) => {
 
         } catch (err) {
             console.log(err)
-            setShowError(() =>([...err]))
+            setShowMsg(err.join(''))
 
         }
         
@@ -102,9 +102,9 @@ const Signup = ({register}) => {
                     value={formData.email}
                     onChange={handleChange}></Input>
                 </FormGroup>
-                {(showError.length)
+                {(showMsg)
                 ?
-                <p>{showError.join('')}</p>
+                <p>{showMsg}</p>
                 :
                 null
             }

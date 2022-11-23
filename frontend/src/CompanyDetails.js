@@ -6,7 +6,7 @@ import JobsCard from "./JobsCard"
 import CurrUserContext from "./CurrUserContext";
 
 
-const CompanyDetails = () => {
+const CompanyDetails = ({apply}) => {
   
   const user = useContext(CurrUserContext)
   
@@ -31,7 +31,7 @@ const CompanyDetails = () => {
             <h1>{company.name}</h1>
             <p>{company.description}</p>
            {company.jobs.map(j => (
-                <JobsCard key={j.id} title={j.title} salary={j.salary} equity={j.equity} />
+                <JobsCard key={j.id} id={j.id} title={j.title} salary={j.salary} equity={j.equity} apply={apply} />
             ))} 
 
         </div>

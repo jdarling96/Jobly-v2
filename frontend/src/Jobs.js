@@ -7,7 +7,7 @@ import useApi from "./hooks/useApi";
 import JobsCard from "./JobsCard";
 import CurrUserContext from "./CurrUserContext";
 
-const Jobs = () => {
+const Jobs = ({apply}) => {
   
   const user = useContext(CurrUserContext)
  
@@ -50,10 +50,12 @@ const Jobs = () => {
         jobs.map((j) => (
           <JobsCard
             key={j.id}
+            id={j.id}
             title={j.title}
             salary={j.salary}
             equity={j.equity}
             companyName={j.companyName}
+            apply={apply}
           />
         ))
       )}
