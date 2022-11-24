@@ -1,52 +1,56 @@
-import React, { useContext } from "react";
-import {Redirect} from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import { Spinner } from "react-spinners-css";
 import { Form, FormGroup, Input, Button } from "reactstrap";
-import useApi from "./hooks/useApi";
+
 import CompanyCard from "./CompanyCard";
-import CurrUserContext from "./CurrUserContext";
+import JoblyApi from "../api/api";
 
 const Companies = () => {
-  
-  const user = useContext(CurrUserContext)
-  console.log(user)
-  
-  
-  const [companies, filter, loading] = useApi('getAllCompanies', user)
-  if(user === undefined) {
-    return <Redirect to="/login"/>
-  }
+  const [companies, setCompanies] = useState();
+  const [searchFilter, setSearchFilter] = useState();
+  const [isLoading, setIsLoading] = useState(true);
 
+  useEffect(() => {
+    const getData = async () => {
+      const res = await JoblyApi.getAllCompanies(searchFilter);
+      setCompanies(res);
+      setIsLoading(false);
+    };
+    getData();
+  }, [searchFilter]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const { value } = e.target[0];
     if (value === "") {
-      filter();
+      setSearchFilter();
     } else {
-      filter({ name: value });
+      setSearchFilter({ name: value });
     }
-};
+  };
 
-  if (loading) {
+  if (isLoading) {
     return (
-      <div className="loading">
-        <Spinner />
+      <div className="spinner">
+        <Spinner color="red" />
       </div>
     );
   }
 
   return (
-    <div>
+    <div className="mt-3">
       <Form onSubmit={handleSubmit}>
-        <FormGroup>
+        <FormGroup className="form-inline">
           <Input
+            className="form-control form-control-lg flex-grow-1"
             id="searchFilter"
             name="search"
             placeholder="Enter a Search Term..."
             type="text"
           />
-          <Button>Search</Button>
+          <Button color="primary" className="btn btn-lg btn-primary">
+            Search
+          </Button>
         </FormGroup>
       </Form>
       {companies.length === 0 ? (

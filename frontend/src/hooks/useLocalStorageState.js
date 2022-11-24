@@ -1,43 +1,21 @@
-import {useState} from "react";
+import { useState, useEffect } from "react";
 
-const useLocalStorageState = (key1, key2) => {
+const useLocalStorageState = (key, firstValue = null) => {
+    const initialValue = localStorage.getItem(key) || firstValue;
 
-    const INITIAL_STATE = {
-        token: window.localStorage.getItem(key1) || "",
-        user: window.localStorage.getItem(key2) || ""
-    }
-    
-    
-    const [state, setState] = useState(INITIAL_STATE)
-
+    const [item, setItem] = useState(initialValue);
   
-        
+    useEffect(function setKeyInLocalStorage() {
+      console.debug("hooks useLocalStorage useEffect", "item=", item);
+  
+      if (item === null) {
+        localStorage.removeItem(key);
+      } else {
+        localStorage.setItem(key, item);
+      }
+    }, [key, item]);
+  
+    return [item, setItem];
+  }
 
-
-    const setLocalStorage = () => {
-        
-        window.localStorage.setItem(key1, state.token)
-        window.localStorage.setItem(key2, state.user)
-    }
-
-
-
-
-const clearLocalStorage = () => {
-    localStorage.clear()
-            
-            
-        }
-        
-
-    return [state, setState, setLocalStorage, clearLocalStorage]
-
-
-
-
-
-}
-
-export default useLocalStorageState
-
-
+export default useLocalStorageState;

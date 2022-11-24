@@ -1,30 +1,36 @@
-import React,{useContext} from "react";
-import { Redirect } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import { Spinner } from "react-spinners-css";
 import { Form, FormGroup, Input, Button } from "reactstrap";
 //import 'bootstrap/dist/css/bootstrap.css';
-import useApi from "./hooks/useApi";
-import JobsCard from "./JobsCard";
-import CurrUserContext from "./CurrUserContext";
 
-const Jobs = ({apply}) => {
-  
-  const user = useContext(CurrUserContext)
- 
-  const [jobs, filter, loading] = useApi("getAllJobs", user);
-  if(user === undefined) return <Redirect to="/login" />
+import JobsCard from "./JobsCard";
+import JoblyApi from "../api/api";
+
+const Jobs = () => {
+  const [jobs, setJobs] = useState();
+  const [searchFilter, setSearchFilter] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const getData = async () => {
+      const res = await JoblyApi.getAllJobs(searchFilter);
+      setJobs(res);
+      setIsLoading(false);
+    };
+    getData();
+  }, [searchFilter]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const { value } = e.target[0];
     if (value === "") {
-      filter();
+      setSearchFilter();
     } else {
-      filter({ title: value });
+      setSearchFilter({ title: value });
     }
   };
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="loading">
         <Spinner />
@@ -32,16 +38,19 @@ const Jobs = ({apply}) => {
     );
   }
   return (
-    <div>
+    <div className="mt-3">
       <Form onSubmit={handleSubmit}>
-        <FormGroup>
+        <FormGroup className="form-inline">
           <Input
+            className="form-control form-control-lg flex-grow-1"
             id="searchFilter"
             name="search"
             placeholder="Enter a Search Term..."
             type="text"
           />
-          <Button>Search</Button>
+          <Button color="primary" className="btn btn-lg btn-primary">
+            Search
+          </Button>
         </FormGroup>
       </Form>
       {jobs.length === 0 ? (
@@ -55,7 +64,6 @@ const Jobs = ({apply}) => {
             salary={j.salary}
             equity={j.equity}
             companyName={j.companyName}
-            apply={apply}
           />
         ))
       )}
