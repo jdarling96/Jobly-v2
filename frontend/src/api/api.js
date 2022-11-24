@@ -99,7 +99,6 @@ class JoblyApi {
   }
 }
 
-// for now, put token ("testuser" / "password" on class)
-/* JoblyApi.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkRlbW8gVXNlciIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2Njg5NzcwMDN9.hyzAYw6-DcQk6zDqZ-hABWCf0LdsH0y-tIdwlrpoTtQ" */
+
 
 export default JoblyApi;

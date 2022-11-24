@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="spinner"
+  >
+    <div
+      class="lds-spinner"
+    >
+      <div>
+        <div
+          class="div-after"
+          style="background: red;"
+        />
+      </div>
+      <div>
+        <div
+          class="div-after"
+          style="background: red;"
+        />
+      </div>
+      <div>
+        <div
+          class="div-after"
+          style="background: red;"
+        />
+      </div>
+      <div>
+        <div
+          class="div-after"
+          style="background: red;"
+        />
+      </div>
+      <div>
+        <div
+          class="div-after"
+          style="background: red;"
+        />
+      </div>
+      <div>
+        <div
+          class="div-after"
+          style="background: red;"
+        />
+      </div>
+      <div>
+        <div
+          class="div-after"
+          style="background: red;"
+        />
+      </div>
+      <div>
+        <div
+          class="div-after"
+          style="background: red;"
+        />
+      </div>
+      <div>
+        <div
+          class="div-after"
+          style="background: red;"
+        />
+      </div>
+      <div>
+        <div
+          class="div-after"
+          style="background: red;"
+        />
+      </div>
+      <div>
+        <div
+          class="div-after"
+          style="background: red;"
+        />
+      </div>
+      <div>
+        <div
+          class="div-after"
+          style="background: red;"
+        />
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot with no jobs 1`] = `
+<DocumentFragment>
+  <div
+    class="loading"
+  >
+    <div
+      class="lds-spinner"
+    >
+      <div>
+        <div
+          class="div-after"
+          style="background: rgb(127, 88, 175);"
+        />
+      </div>
+      <div>
+        <div
+          class="div-after"
+          style="background: rgb(127, 88, 175);"
+        />
+      </div>
+      <div>
+        <div
+          class="div-after"
+          style="background: rgb(127, 88, 175);"
+        />
+      </div>
+      <div>
+        <div
+          class="div-after"
+          style="background: rgb(127, 88, 175);"
+        />
+      </div>
+      <div>
+        <div
+          class="div-after"
+          style="background: rgb(127, 88, 175);"
+        />
+      </div>
+      <div>
+        <div
+          class="div-after"
+          style="background: rgb(127, 88, 175);"
+        />
+      </div>
+      <div>
+        <div
+          class="div-after"
+          style="background: rgb(127, 88, 175);"
+        />
+      </div>
+      <div>
+        <div
+          class="div-after"
+          style="background: rgb(127, 88, 175);"
+        />
+      </div>
+      <div>
+        <div
+          class="div-after"
+          style="background: rgb(127, 88, 175);"
+        />
+      </div>
+      <div>
+        <div
+          class="div-after"
+          style="background: rgb(127, 88, 175);"
+        />
+      </div>
+      <div>
+        <div
+          class="div-after"
+          style="background: rgb(127, 88, 175);"
+        />
+      </div>
+      <div>
+        <div
+          class="div-after"
+          style="background: rgb(127, 88, 175);"
+        />
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
