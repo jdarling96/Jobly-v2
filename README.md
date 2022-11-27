@@ -16,9 +16,25 @@
 
 ![Screenshot from 2022-11-24 16-18-49](https://user-images.githubusercontent.com/28359915/203873567-491749ff-2753-4f0f-8f2c-f146b4b39690.png)
 
+## Setup
+ Follow to run Jobly on your local environment aswell as be able to run the tests. Jobly uses postgresql for its database. Please install postgresql aswell as node and npm.
+   
+   Backend
+   * Create and seed db: psql < jobly.sql
+   * Install project dependencies: npm i
+   * Start the server: npm start
+
+   Frontend
+   * Install project dependencies: npm i
+   * Run react-app: npm start
+
 ## Authentication
+   Jobly authenticates users by providing a JWT token on the backend and storing that token on the front end. Protected routes use Express middleware to run authentication functions that check for certain parameters on a user as well as a JWT token that has been signed with a secret key. The front end stores the token within an API class that offers encapsulation and reusability to access protected routes. All sensitive variables are stored as env variables.
 
 ## Testing
+  Both the front end and back end are thoroughly tested using Jest. The Backend was developed using TDD to ensure complete coverage and functionality of models and routes.
+  Simply run the tests using:
+   * npm run test
 
 
 
@@ -33,6 +49,7 @@
     * jsonwebtoken
     * bcrypt
     * jest
+    * Postgres
   ### Frontend
     * Javascript
     * React
